@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">LockScreen</string>
+    <string name="device_admin_description">在系统“设备管理器页面”中显示的当前应用程序的描述</string>
+    <string name="device_admin_label">在系统“设备管理器页面”中显示的当前应用程序的标题</string>
+</resources>
