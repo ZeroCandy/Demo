@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +14,8 @@ import android.widget.TextView;
 
 import com.candy.rollviewpagerdemo.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -22,10 +23,14 @@ import java.util.List;
  * Created by 帅阳 on 2015/12/9.
  */
 public class RollViewPager extends ViewPager {
+    private static final String TAG="RollViewPager";
+
     private Context mContext;
     private ImageLoader mImageLoader;
-    private int mDownX;
+    /**按下时的X坐标*/
     private int mDownY;
+    /**按下时的Y坐标*/
+    private int mDownX;
 
     /**标记是否有标题*/
     private boolean mWithTitle = false;
@@ -38,6 +43,7 @@ public class RollViewPager extends ViewPager {
     private List<String> mTitleList;
     /**图片资源集合*/
     private List mImgList;
+    /**指示点集合*/
     private List<View> mDotViewList;
     private OnPageClickListener mOnPageClickListener;
     private RollTask mRollTask;
@@ -61,24 +67,27 @@ public class RollViewPager extends ViewPager {
         this.mOnPageClickListener = listener;
 
         mImageLoader = ImageLoader.getInstance();
+        mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
         mRollTask = new RollTask();
 
         addOnPageChangeListener(new OnPageChangeListener() {
             @Override
-            public void onPageSelected(int position) {
+            public void onPageSelected(int position) {//Page选择中后的操作
+                mCurrentIndex=position;
+                //带标题的情况下，切换到当前对应的标题
                 if (mWithTitle) {
                     mPagerTitleTv.setText(mTitleList.get(position));
                 }
-                // TODO
+                //修改对应的指示点背景图片
+                for(int i=0;i<mImgList.size();i++){
+                    mDotViewList.get(i).setBackgroundResource(i==position?R.mipmap.dot_focus:R.mipmap.dot_normal);
+                }
             }
 
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
             @Override
-            public void onPageScrollStateChanged(int state) {
-            }
+            public void onPageScrollStateChanged(int state) {}
         });
     }
 
@@ -91,10 +100,10 @@ public class RollViewPager extends ViewPager {
     public void initTitleList(TextView pagerTitleTv, List<String> titleList) {
         if (null != pagerTitleTv && null != titleList && titleList.size() >= 0) {
             mWithTitle = true;
+            this.mPagerTitleTv = pagerTitleTv;
+            this.mTitleList = titleList;
             pagerTitleTv.setText(titleList.get(0));
         }
-        this.mPagerTitleTv = pagerTitleTv;
-        this.mTitleList = titleList;
     }
 
     /**
@@ -108,26 +117,11 @@ public class RollViewPager extends ViewPager {
 
     /**
      * 初始化图片资源IDs
-     * @param resIds
+     * @param resIdList
      */
-    public void initImgIds(int[] resIds){
-        mIsImgResIds =true;
-        this.mImgList= Arrays.asList(resIds);
-    }
-
-    /**
-     * 开始滚动
-     */
-    public void startRoll(){
-        //设置Adapter
-        if(mAdapter==null){
-            mAdapter=new MyAdapter();
-            setAdapter(mAdapter);
-        }else{
-            mAdapter.notifyDataSetChanged();
-        }
-        //延迟执行轮播任务
-        mHandler.postDelayed(mRollTask,3000);
+    public void initImgIds(List<Integer> resIdList){
+        this.mIsImgResIds =true;
+        this.mImgList= resIdList;
     }
 
     /**
@@ -182,13 +176,28 @@ public class RollViewPager extends ViewPager {
     }
 
     /**
+     * 开始滚动
+     */
+    public void startRoll(){
+        //设置Adapter
+        if(mAdapter==null){
+            mAdapter=new MyAdapter();
+            setAdapter(mAdapter);
+        }else{
+            mAdapter.notifyDataSetChanged();
+        }
+        //延迟执行轮播任务
+        mHandler.postDelayed(mRollTask, 3000);
+    }
+
+    /**
      * 轮播任务
      */
     private class RollTask implements Runnable {
         @Override
         public void run() {
             //设置当前Page索引
-            mCurrentIndex = (mCurrentIndex + 1) % mDotViewList.size();
+            mCurrentIndex = (mCurrentIndex + 1) % mImgList.size();
             //发送消息
             mHandler.obtainMessage().sendToTarget();
         }
@@ -208,12 +217,13 @@ public class RollViewPager extends ViewPager {
 
         @Override
         public Object instantiateItem(ViewGroup container, final int position) {
-            //初始化条目布局并加载显示网络图片
+            //初始化条目布局并加载显示图片
             View view=View.inflate(mContext, R.layout.item_viewpager,null);
             ImageView imageView=((ImageView) view.findViewById(R.id.item_iv));
             if(mIsImgResIds){
                 imageView.setImageResource((Integer) mImgList.get(position));
             }else{
+                Log.i(TAG,(String)mImgList.get(position));
                 mImageLoader.displayImage((String)mImgList.get(position), imageView);
             }
             //设置Touch监听器判断是否为点击事件
