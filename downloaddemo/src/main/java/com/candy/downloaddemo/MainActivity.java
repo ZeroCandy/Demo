@@ -2,23 +2,18 @@ package com.candy.downloaddemo;
 
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG="MainActivity";
     private static final String URL="http://gaobeicrowdfunding.com/projectApk/quanchou.apk";
 
-    private long mRequestID;
+    private long mID;
     private DownloadManager mDownloadManager;
     private DownloadManager.Request mRequest;
     private BroadcastReceiver mBroadcastReceiver;
@@ -29,15 +24,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initDownloadManager();
-        initBroadcastReceiver();
     }
 
     private void initDownloadManager() {
         //获取DownloadManager系统服务对象
         mDownloadManager = ((DownloadManager) getSystemService(DOWNLOAD_SERVICE));
+
         //获取下载请求对象
         mRequest = new DownloadManager.Request(Uri.parse(URL));
-        //设置下载路径和下载文件名
+        //设置下载路径和下载文件名（Environment.DIRECTORY_DOWNLOADS为下载到SD卡中"Android/data"目录下应用对应包名目录中）
         //mRequest.setDestinationInExternalPublicDir("Gaobei", "quanchouv1.0.apk");
         mRequest.setDestinationInExternalFilesDir(this, Environment.DIRECTORY_DOWNLOADS,"quanchou_v1.0.apk");
         //设置只允许在WiFi下进行下载
@@ -59,24 +54,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void initBroadcastReceiver() {
-        //设置广播过滤意图
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
-        //注册广播接收者
-        mBroadcastReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                //从广播中获取下载请求ID
-                long requestID = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
-                if(requestID==mRequestID){
-                    Toast.makeText(getApplicationContext(), "下载完成", Toast.LENGTH_SHORT).show();
-                }
-            }
-        };
-        registerReceiver(mBroadcastReceiver,intentFilter);
-    }
-
     /**
      * 开始下载
      * @param view
@@ -84,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     public void startDownload(View view){
         //进行下载，并获取系统为当前的下载请求分配的一个唯一ID
         //利用该ID可以重新获得这个下载任务并进行查询下载状态、取消下载等操作
-        mRequestID = mDownloadManager.enqueue(mRequest);
+        mID = mDownloadManager.enqueue(mRequest);
     }
 
     /**
@@ -93,6 +70,5 @@ public class MainActivity extends AppCompatActivity {
      */
     public void exitApp(View view){
         android.os.Process.killProcess(android.os.Process.myPid());
-        //System.exit(0);
     }
 }
