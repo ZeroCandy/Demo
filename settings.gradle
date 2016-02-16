@@ -1,1 +1,1 @@
-include ':app', ':lockscreen', ':rollviewpagerdemo', ':downloaddemo'
+include ':app', ':lockscreen', ':rollviewpagerdemo', ':downloaddemo', ':ivlayoutparams'
