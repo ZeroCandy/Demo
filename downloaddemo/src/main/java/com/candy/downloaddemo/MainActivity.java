@@ -9,9 +9,16 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.candy.downloaddemo.utils.Util;
+
+import java.io.File;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String URL="http://gaobeicrowdfunding.com/projectApk/quanchou.apk";
+    //Environment.DIRECTORY_DOWNLOADS为下载到SD卡中"Android/data"目录下应用对应包名目录中
+    private static final String DIR_TYPE=Environment.DIRECTORY_DOWNLOADS;
+    private static final String FILE_NAME=URL.substring(URL.lastIndexOf("/")+1);
 
     private long mID;
     private DownloadManager mDownloadManager;
@@ -32,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
         //获取下载请求对象
         mRequest = new DownloadManager.Request(Uri.parse(URL));
-        //设置下载路径和下载文件名（Environment.DIRECTORY_DOWNLOADS为下载到SD卡中"Android/data"目录下应用对应包名目录中）
+        //设置下载路径和下载文件名
         //mRequest.setDestinationInExternalPublicDir("Gaobei", "quanchouv1.0.apk");
-        mRequest.setDestinationInExternalFilesDir(this, Environment.DIRECTORY_DOWNLOADS,"quanchou_v1.0.apk");
+        mRequest.setDestinationInExternalFilesDir(this, DIR_TYPE,FILE_NAME);
         //设置只允许在WiFi下进行下载
         mRequest.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
         //设置Notifications的标题和描述
@@ -59,6 +66,15 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     public void startDownload(View view){
+        //判断文件是否存在
+        File dir = getExternalFilesDir(DIR_TYPE);
+        if(dir!=null){
+            File file = new File(dir.getPath(), FILE_NAME);
+            if(file.exists()){
+                Util.startInstallActivity(this,Uri.fromFile(file));
+                return ;
+            }
+        }
         //进行下载，并获取系统为当前的下载请求分配的一个唯一ID
         //利用该ID可以重新获得这个下载任务并进行查询下载状态、取消下载等操作
         mID = mDownloadManager.enqueue(mRequest);
