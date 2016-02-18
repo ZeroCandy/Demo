@@ -10,6 +10,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.candy.downloaddemo.utils.Util;
+
 /**
  * Created by ZeroCandy on 2016/1/27.
  */
@@ -30,10 +32,10 @@ public class DownloadReceiver extends BroadcastReceiver{
             if(cursor.moveToFirst()){
                 //获取下载文件URI
                 String uri = cursor.getString(cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI));
-                if(!TextUtils.isEmpty(uri)){
+                if(!TextUtils.isEmpty(uri) && uri.endsWith(".apk")){
                     Log.i(TAG, uri);
                     Toast.makeText(context,"\""+uri.substring(uri.lastIndexOf("/")+1)+"\"下载完成",Toast.LENGTH_LONG).show();
-                    startInstallActivity(context, uri);
+                    Util.startInstallActivity(context,Uri.parse(uri));
                 }
             }
         }else if(intent.getAction().equals(DownloadManager.ACTION_NOTIFICATION_CLICKED)){//判断是否为通知栏点击广播（Receiver过滤的有下载通知栏点击广播）
@@ -45,17 +47,5 @@ public class DownloadReceiver extends BroadcastReceiver{
         }
     }
 
-    /**
-     * 启动安装界面
-     * @param context
-     * @param uri
-     */
-    private void startInstallActivity(Context context, String uri) {
-        Intent intent = new Intent();
-        intent.setAction("android.intent.action.VIEW");
-        intent.addCategory("android.intent.category.DEFAULT");
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setDataAndType(Uri.parse(uri),"application/vnd.android.package-archive");
-        context.startActivity(intent);
-    }
+
 }
