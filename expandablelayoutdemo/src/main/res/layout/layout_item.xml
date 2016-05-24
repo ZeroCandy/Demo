@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--条目布局中使用ExpandableLayoutItem控件-->
+    <!--el_headerLayout属性：设置标题布局-->
+    <!--el_contentLayout属性：设置扩展内容布局-->
+    <com.andexert.expandablelayout.library.ExpandableLayoutItem
+        xmlns:expandable="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        expandable:el_headerLayout="@layout/layout_header"
+        expandable:el_contentLayout="@layout/layout_content"/>
+
+</LinearLayout>

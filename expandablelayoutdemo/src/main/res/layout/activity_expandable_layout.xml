@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.candy.expandablelayoutdemo.ExpandableLayoutActivity">
+
+    <!--布局中使用ExpandableLayout控件-->
+    <!--el_headerLayout属性：设置标题布局-->
+    <!--el_contentLayout属性：设置扩展内容布局-->
+    <com.andexert.expandablelayout.library.ExpandableLayout
+        xmlns:expandable="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        expandable:el_headerLayout="@layout/layout_header"
+        expandable:el_contentLayout="@layout/layout_content"
+        android:background="@android:color/white"/>
+
+</RelativeLayout>
