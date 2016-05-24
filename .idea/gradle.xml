@@ -3,11 +3,23 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="distributionType" value="LOCAL" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="gradleHome" value="C:\Java\Android Studio\gradle\gradle-2.8" />
         <option name="gradleJvm" value="1.8" />
         <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/downloaddemo" />
+            <option value="$PROJECT_DIR$/image3levelcache" />
+            <option value="$PROJECT_DIR$/ipcdemo" />
+            <option value="$PROJECT_DIR$/ivlayoutparams" />
+            <option value="$PROJECT_DIR$/lockscreen" />
+            <option value="$PROJECT_DIR$/rollviewpagerdemo" />
+          </set>
+        </option>
+        <option name="myModules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
