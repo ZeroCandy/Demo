@@ -13,6 +13,7 @@
       <module fileurl="file://$PROJECT_DIR$/recordaudiodemo/recordaudiodemo.iml" filepath="$PROJECT_DIR$/recordaudiodemo/recordaudiodemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/rollviewpagerdemo/rollviewpagerdemo.iml" filepath="$PROJECT_DIR$/rollviewpagerdemo/rollviewpagerdemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/runtimepermissionsdemo/runtimepermissionsdemo.iml" filepath="$PROJECT_DIR$/runtimepermissionsdemo/runtimepermissionsdemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xfermodedemo/xfermodedemo.iml" filepath="$PROJECT_DIR$/xfermodedemo/xfermodedemo.iml" />
     </modules>
   </component>
 </project>

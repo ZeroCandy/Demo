@@ -1,1 +1,1 @@
-include ':app', ':lockscreen', ':rollviewpagerdemo', ':downloaddemo', ':ivlayoutparams', ':image3levelcache', ':ipcdemo', ':expandablelayoutdemo', ':runtimepermissionsdemo', ':recordaudiodemo'
+include ':app', ':lockscreen', ':rollviewpagerdemo', ':downloaddemo', ':ivlayoutparams', ':image3levelcache', ':ipcdemo', ':expandablelayoutdemo', ':runtimepermissionsdemo', ':recordaudiodemo', ':xfermodedemo'

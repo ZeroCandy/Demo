@@ -20,23 +20,10 @@
             <option value="$PROJECT_DIR$/recordaudiodemo" />
             <option value="$PROJECT_DIR$/rollviewpagerdemo" />
             <option value="$PROJECT_DIR$/runtimepermissionsdemo" />
+            <option value="$PROJECT_DIR$/xfermodedemo" />
           </set>
         </option>
-        <option name="myModules">
-          <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/downloaddemo" />
-            <option value="$PROJECT_DIR$/expandablelayoutdemo" />
-            <option value="$PROJECT_DIR$/image3levelcache" />
-            <option value="$PROJECT_DIR$/ipcdemo" />
-            <option value="$PROJECT_DIR$/ivlayoutparams" />
-            <option value="$PROJECT_DIR$/lockscreen" />
-            <option value="$PROJECT_DIR$/recordaudiodemo" />
-            <option value="$PROJECT_DIR$/rollviewpagerdemo" />
-            <option value="$PROJECT_DIR$/runtimepermissionsdemo" />
-          </set>
-        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
   </component>
