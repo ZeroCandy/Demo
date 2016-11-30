@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">IconFont</string>
+    <!--16进制字符代表ttf文件中对应的图标-->
+    <string name="lab">&#xe8d2; 实验杯</string>
+    <string name="like">&#xe8d3; 赞</string>
+    <string name="location">&#xe8d4; 位置</string>
+    <string name="bubble">&#xe8d6; 聊天气泡</string>
+    <string name="bulb">&#xe8d7; 灯泡</string>
+    <string name="dog">&#xe976; 巴扎黑</string>
+</resources>
