@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/downloaddemo/downloaddemo.iml" filepath="$PROJECT_DIR$/downloaddemo/downloaddemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/expandablelayoutdemo/expandablelayoutdemo.iml" filepath="$PROJECT_DIR$/expandablelayoutdemo/expandablelayoutdemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/iconfont/iconfont.iml" filepath="$PROJECT_DIR$/iconfont/iconfont.iml" />
       <module fileurl="file://$PROJECT_DIR$/image3levelcache/image3levelcache.iml" filepath="$PROJECT_DIR$/image3levelcache/image3levelcache.iml" />
       <module fileurl="file://$PROJECT_DIR$/ipcdemo/ipcdemo.iml" filepath="$PROJECT_DIR$/ipcdemo/ipcdemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/ivlayoutparams/ivlayoutparams.iml" filepath="$PROJECT_DIR$/ivlayoutparams/ivlayoutparams.iml" />
